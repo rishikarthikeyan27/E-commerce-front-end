@@ -44,15 +44,18 @@ const Center = styled.div`
 `;
 
 const Logo = styled.h1`
-  font-weight: bold;
+  font-weight: 1000;
 `;
 const Right = styled.div`
   flex: 1;
+  display: flex;
+  justify-content: flex-end;
 `;
 
 const MenuItem = styled.div`
   font-size: 14px;
   cursor: pointer;
+  margin-left: 25px;
 `;
 
 const Navbar = () => {
@@ -73,7 +76,7 @@ const Navbar = () => {
           <MenuItem>REGISTER</MenuItem>
           <MenuItem>SIGN IN</MenuItem>
           <MenuItem>
-            <Badge badgecontent={4} color='primary'>
+            <Badge badgeContent={4} color='primary'>
               <ShoppingCartIcon />
             </Badge>
           </MenuItem>
