@@ -1,6 +1,7 @@
 import { ArrowLeftOutlined, ArrowRightOutlined } from '@mui/icons-material';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { sliderItems } from '../data';
 
 const Container = styled.div`
   height: 100vh;
@@ -32,7 +33,7 @@ const Arrow = styled.div`
 const Wrapper = styled.div`
   height: 100%;
   display: flex;
-  transform: translateX(0vw);
+  transform: translateX(${(props) => props.slideIndex * -100}vw);
 `;
 
 const Slide = styled.div`
@@ -77,51 +78,32 @@ const Button = styled.button`
 const Slider = () => {
   const [slideIndex, setSlideIndex] = useState(0);
   const handleClick = (direction) => {
-    console.log(direction);
+    if (direction === 'left') {
+      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : sliderItems.length - 1);
+    } else {
+      setSlideIndex(slideIndex < sliderItems.length - 1 ? slideIndex + 1 : 0);
+    }
   };
-
   return (
     <Container>
       <Arrow direction='left' onClick={() => handleClick('left')}>
         <ArrowLeftOutlined />
       </Arrow>
-      <Wrapper>
-        <Slide bg='f5fafd'>
-          <ImageContainer>
-            <Image src='https://images.unsplash.com/photo-1589465885857-44edb59bbff2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVvcGxlJTIwd2hpdGUlMjBiYWNrZ3JvdW5kfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60'></Image>
-          </ImageContainer>
-          <InfoContainer>
-            <Title>SUMMER SALE</Title>
-            <Description>
-              DON'T COMPROMISE ON STYLE. GET FLAT 30%OFF FOR NEW ARRIVALS
-            </Description>
-            <Button> SHOW NOW</Button>
-          </InfoContainer>
-        </Slide>
-        <Slide bg='fcf1ed'>
-          <ImageContainer>
-            <Image src='https://images.unsplash.com/photo-1589465885857-44edb59bbff2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVvcGxlJTIwd2hpdGUlMjBiYWNrZ3JvdW5kfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60'></Image>
-          </ImageContainer>
-          <InfoContainer>
-            <Title>WINTER SALE</Title>
-            <Description>
-              DON'T COMPROMISE ON STYLE. GET FLAT 30%OFF FOR NEW ARRIVALS
-            </Description>
-            <Button> SHOW NOW</Button>
-          </InfoContainer>
-        </Slide>
-        <Slide bg='fbf0f4'>
-          <ImageContainer>
-            <Image src='https://images.unsplash.com/photo-1589465885857-44edb59bbff2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVvcGxlJTIwd2hpdGUlMjBiYWNrZ3JvdW5kfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60'></Image>
-          </ImageContainer>
-          <InfoContainer>
-            <Title>POPULAR SALE</Title>
-            <Description>
-              DON'T COMPROMISE ON STYLE. GET FLAT 30%OFF FOR NEW ARRIVALS
-            </Description>
-            <Button> SHOW NOW</Button>
-          </InfoContainer>
-        </Slide>
+      <Wrapper slideIndex={slideIndex}>
+        {sliderItems.map((item) => {
+          return (
+            <Slide key={item.id} bg={item.bg}>
+              <ImageContainer>
+                <Image src={item.img}></Image>
+              </ImageContainer>
+              <InfoContainer>
+                <Title>{item.title}</Title>
+                <Description>{item.desc}</Description>
+                <Button> SHOW NOW</Button>
+              </InfoContainer>
+            </Slide>
+          );
+        })}
       </Wrapper>
       <Arrow direction='right' onClick={() => handleClick('right')}>
         <ArrowRightOutlined />
