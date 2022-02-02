@@ -2,6 +2,9 @@ import styled from 'styled-components';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import PinterestIcon from '@mui/icons-material/Pinterest';
+import RoomIcon from '@mui/icons-material/Room';
+import PhoneIcon from '@mui/icons-material/Phone';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
 
 const Container = styled.div`
   display: flex;
@@ -19,7 +22,7 @@ const Logo = styled.h1`
 `;
 
 const Description = styled.p`
-  margin: 20px 0px;
+  margin-bottom: 20px;
 `;
 
 const SocialContainer = styled.div`
@@ -29,14 +32,44 @@ const SocialContainer = styled.div`
 const SocialIcon = styled.div`
   width: 40px;
   height: 40px;
+  border-radius: 50%;
+  color: white;
+  background-color: #${(props) => props.bg};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
 `;
 
 const Center = styled.div`
   flex: 1;
 `;
+
+const Title = styled.h3`
+  margin-top: 20px;
+  margin-bottom: 30px;
+`;
+
+const List = styled.ul`
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+const ListItem = styled.li`
+  width: 50%;
+  margin-bottom: 10px;
+`;
+
 const Right = styled.div`
   flex: 1;
 `;
+
+const ContactItem = styled.div``;
+
+const Payment = styled.img``;
 
 const Footer = () => {
   return (
@@ -48,19 +81,47 @@ const Footer = () => {
           the market.
         </Description>
         <SocialContainer>
-          <SocialIcon>
+          <SocialIcon bg='3B5999'>
             <FacebookIcon />
           </SocialIcon>
-          <SocialIcon>
+          <SocialIcon bg='E4405f'>
             <InstagramIcon />
           </SocialIcon>
-          <SocialIcon>
+          <SocialIcon bg='E60023'>
             <PinterestIcon />
           </SocialIcon>
         </SocialContainer>
       </Left>
-      <Center></Center>
-      <Right></Right>
+      <Center>
+        <Title>Useful Links</Title>
+        <List>
+          <ListItem>Home</ListItem>
+          <ListItem>Cart</ListItem>
+          <ListItem>Men Fashion</ListItem>
+          <ListItem>Ladies Fashion</ListItem>
+          <ListItem>Accessories</ListItem>
+          <ListItem>My Account</ListItem>
+          <ListItem>Order Tracking</ListItem>
+          <ListItem>Wishlist</ListItem>
+          <ListItem>Terms</ListItem>
+        </List>
+      </Center>
+      <Right>
+        <Title>Contact</Title>
+        <ContactItem>
+          <RoomIcon />
+          622 Dixie Path, South Tobinchester 98336
+        </ContactItem>
+        <ContactItem>
+          <PhoneIcon />
+          +1 234 56 78
+        </ContactItem>
+        <ContactItem>
+          <MailOutlineIcon />
+          contact@lama.dev
+        </ContactItem>
+        <Payment src='https://i.ibb.co/Qfvn4z6/payment.png' />
+      </Right>
     </Container>
   );
 };
