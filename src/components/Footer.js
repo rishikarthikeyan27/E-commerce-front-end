@@ -67,9 +67,15 @@ const Right = styled.div`
   flex: 1;
 `;
 
-const ContactItem = styled.div``;
+const ContactItem = styled.div`
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+`;
 
-const Payment = styled.img``;
+const Payment = styled.img`
+  width: 50%;
+`;
 
 const Footer = () => {
   return (
@@ -109,15 +115,15 @@ const Footer = () => {
       <Right>
         <Title>Contact</Title>
         <ContactItem>
-          <RoomIcon />
+          <RoomIcon style={{ marginRight: '10px' }} />
           622 Dixie Path, South Tobinchester 98336
         </ContactItem>
         <ContactItem>
-          <PhoneIcon />
+          <PhoneIcon style={{ marginRight: '10px' }} />
           +1 234 56 78
         </ContactItem>
         <ContactItem>
-          <MailOutlineIcon />
+          <MailOutlineIcon style={{ marginRight: '10px' }} />
           contact@lama.dev
         </ContactItem>
         <Payment src='https://i.ibb.co/Qfvn4z6/payment.png' />
