@@ -1,5 +1,5 @@
 import { ArrowLeftOutlined, ArrowRightOutlined } from '@mui/icons-material';
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -7,6 +7,7 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   position: relative;
+  overflow: hidden;
 `;
 
 const Arrow = styled.div`
@@ -25,17 +26,21 @@ const Arrow = styled.div`
   margin: auto;
   cursor: pointer;
   opacity: 0.5;
+  z-index: 2;
 `;
 
 const Wrapper = styled.div`
   height: 100%;
+  display: flex;
+  transform: translateX(0vw);
 `;
 
 const Slide = styled.div`
-    display: flex;
-    align-items = center;
-    height: 100vh;
-    width: 100vw;
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #${(props) => props.bg};
 `;
 
 const ImageContainer = styled.div`
@@ -44,7 +49,7 @@ const ImageContainer = styled.div`
 `;
 
 const Image = styled.img`
-  height: 80%;
+  height: 90%;
 `;
 
 const InfoContainer = styled.div`
@@ -70,13 +75,18 @@ const Button = styled.button`
 `;
 
 const Slider = () => {
+  const [slideIndex, setSlideIndex] = useState(0);
+  const handleClick = (direction) => {
+    console.log(direction);
+  };
+
   return (
     <Container>
-      <Arrow direction='left'>
+      <Arrow direction='left' onClick={() => handleClick('left')}>
         <ArrowLeftOutlined />
       </Arrow>
       <Wrapper>
-        <Slide>
+        <Slide bg='f5fafd'>
           <ImageContainer>
             <Image src='https://images.unsplash.com/photo-1589465885857-44edb59bbff2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVvcGxlJTIwd2hpdGUlMjBiYWNrZ3JvdW5kfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60'></Image>
           </ImageContainer>
@@ -88,8 +98,32 @@ const Slider = () => {
             <Button> SHOW NOW</Button>
           </InfoContainer>
         </Slide>
+        <Slide bg='fcf1ed'>
+          <ImageContainer>
+            <Image src='https://images.unsplash.com/photo-1589465885857-44edb59bbff2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVvcGxlJTIwd2hpdGUlMjBiYWNrZ3JvdW5kfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60'></Image>
+          </ImageContainer>
+          <InfoContainer>
+            <Title>WINTER SALE</Title>
+            <Description>
+              DON'T COMPROMISE ON STYLE. GET FLAT 30%OFF FOR NEW ARRIVALS
+            </Description>
+            <Button> SHOW NOW</Button>
+          </InfoContainer>
+        </Slide>
+        <Slide bg='fbf0f4'>
+          <ImageContainer>
+            <Image src='https://images.unsplash.com/photo-1589465885857-44edb59bbff2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVvcGxlJTIwd2hpdGUlMjBiYWNrZ3JvdW5kfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60'></Image>
+          </ImageContainer>
+          <InfoContainer>
+            <Title>POPULAR SALE</Title>
+            <Description>
+              DON'T COMPROMISE ON STYLE. GET FLAT 30%OFF FOR NEW ARRIVALS
+            </Description>
+            <Button> SHOW NOW</Button>
+          </InfoContainer>
+        </Slide>
       </Wrapper>
-      <Arrow direction='right'>
+      <Arrow direction='right' onClick={() => handleClick('right')}>
         <ArrowRightOutlined />
       </Arrow>
     </Container>
