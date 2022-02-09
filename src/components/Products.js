@@ -8,7 +8,12 @@ const Container = styled.div`
   flex-wrap: wrap;
   justify-contents: space-between;
 `;
-const Products = () => {
+const Products = ({ category, filters, sort }) => {
+  console.log('Props received by Products component : ', {
+    category,
+    filters,
+    sort,
+  });
   return (
     <Container>
       {popularProducts.map((item) => {
