@@ -11,13 +11,12 @@ const Container = styled.div`
   justify-contents: space-between;
 `;
 const Products = ({ category, filters, sort }) => {
-  console.log('Props : ', [category, filters, sort]);
-
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   // Get products from database to the frontend and set the 'products' state.
   useEffect(() => {
+    let isApiSubscribed = true;
     const getProducts = async () => {
       try {
         const res = await axios.get(
@@ -25,15 +24,20 @@ const Products = ({ category, filters, sort }) => {
             ? `http://localhost:5000/api/products/?category=${category}`
             : 'http://localhost:5000/api/products'
         );
-        setProducts(res.data);
+        if (isApiSubscribed) {
+          setProducts(res.data);
+        }
       } catch (error) {}
     };
+
     getProducts();
+    return () => {
+      isApiSubscribed = false;
+      console.log(isApiSubscribed);
+    };
   }, [category]);
 
-  console.log('Products : ', products);
-
-  // Get products according to the category in the url and according to the filters.
+  // Get products according to the category in the url and the filters.
   useEffect(() => {
     category &&
       setFilteredProducts(
@@ -47,9 +51,13 @@ const Products = ({ category, filters, sort }) => {
 
   return (
     <Container>
-      {filteredProducts.map((item) => {
-        return <Product key={item.id} item={item} />;
-      })}
+      {category
+        ? filteredProducts.map((item) => {
+            return <Product key={item.id} item={item} />;
+          })
+        : products.slice(0, 8).map((item) => {
+            return <Product key={item.id} item={item} />;
+          })}
     </Container>
   );
 };

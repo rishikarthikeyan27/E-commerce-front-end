@@ -36,7 +36,7 @@ const ProductList = () => {
   const urlPathNameItems = location.pathname.split('/');
   const category = urlPathNameItems[2];
   const [filters, setFilters] = useState({});
-  const [sort, setSort] = useState('newest');
+  const [sort, setSort] = useState('Newest');
 
   const handleFilter = (e) => {
     const value = e.target.value;
@@ -49,7 +49,7 @@ const ProductList = () => {
     <Container>
       <Navbar />
       <Announcement />
-      <Title>Dresses</Title>
+      <Title>{category}</Title>
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products :</FilterText>
@@ -61,6 +61,8 @@ const ProductList = () => {
             <Option>Blue</Option>
             <Option>Yellow</Option>
             <Option>Green</Option>
+            <Option>Orange</Option>
+            <Option>Grey</Option>
           </Select>
           <Select name='size' onChange={handleFilter}>
             <Option disabled>Size</Option>
