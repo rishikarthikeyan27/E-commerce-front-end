@@ -6,9 +6,9 @@ import Footer from '../components/Footer';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { publicRequest } from '../requestMethods';
-
 import { Add, Remove } from '@mui/icons-material';
-import axios from 'axios';
+import { addProduct } from '../redux/cartRedux';
+import { useDispatch } from 'react-redux';
 
 const Container = styled.div``;
 
@@ -108,7 +108,7 @@ const Product = () => {
   const [quantity, setQuantity] = useState(1);
   const [color, setColor] = useState('');
   const [size, setSize] = useState('');
-
+  const dispatch = useDispatch();
   useEffect(() => {
     const getProduct = async () => {
       try {
@@ -130,7 +130,7 @@ const Product = () => {
   };
 
   const handleAddToCart = () => {
-    console.log('Added to Cart');
+    dispatch(addProduct({ ...product, quantity, color, size }));
   };
 
   return (

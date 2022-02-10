@@ -10,6 +10,7 @@ import Product from './pages/Product';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Cart from './pages/Cart';
+
 function App() {
   //TODO: Delete this Later
   const user = true;
