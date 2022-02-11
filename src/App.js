@@ -10,6 +10,7 @@ import Product from './pages/Product';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Cart from './pages/Cart';
+import Success from './pages/Success';
 
 function App() {
   //TODO: Delete this Later
@@ -27,6 +28,9 @@ function App() {
       </Routes>
       <Routes>
         <Route path='/cart' element={<Cart />} />
+      </Routes>
+      <Routes>
+        <Route path='/success' element={<Success />} />
       </Routes>
       <Routes>
         <Route path='/login' element={user ? <Navigate to='/' /> : <Login />} />

@@ -4,6 +4,12 @@ import Announcement from '../components/Announcement';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import { useSelector } from 'react-redux';
+import StripeCheckout from 'react-stripe-checkout';
+import { useEffect, useState } from 'react';
+import { userRequest } from '../requestMethods';
+import { useNavigate } from 'react-router-dom';
+
+const KEY = process.env.REACT_APP_STRIPE;
 
 const Container = styled.div``;
 
@@ -147,7 +153,24 @@ const Button = styled.button`
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
-  console.log('Cart : ', cart);
+  const [stripeToken, setStripeToken] = useState(null);
+  const navigate = useNavigate();
+  const onToken = (token) => {
+    setStripeToken(token);
+  };
+
+  useEffect(() => {
+    const makeRequest = async () => {
+      try {
+        const res = await userRequest.post('/checkout/payment', {
+          tokenId: stripeToken.id,
+          amount: cart.total * 100,
+        });
+        navigate('/success', { data: res.data });
+      } catch (error) {}
+    };
+    stripeToken && cart.total >= 1 && makeRequest();
+  }, [stripeToken, cart.total, navigate]);
   return (
     <Container>
       <Navbar />
@@ -213,7 +236,18 @@ const Cart = () => {
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
             </SummaryItem>
-            <Button>CHECKOUT NOW</Button>
+            <StripeCheckout
+              name='Rocket Shop'
+              image='https://avatars.githubusercontent.com/u/1486366?v=4'
+              billingAddress
+              shippingAddress
+              description='Your total is $20'
+              token={onToken}
+              amount={cart.total * 100}
+              stripeKey={process.env.REACT_APP_STRIPE}
+            >
+              <Button>CHECKOUT NOW</Button>
+            </StripeCheckout>
           </Summary>
         </Bottom>
       </Wrapper>
