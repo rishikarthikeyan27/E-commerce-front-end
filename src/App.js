@@ -14,7 +14,7 @@ import Success from './pages/Success';
 
 function App() {
   //TODO: Delete this Later
-  const user = true;
+  const user = false;
   return (
     <Router>
       <Routes>
